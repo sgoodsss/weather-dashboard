@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+ --darkBlue: #1d263b;
+ --indigo: #2B4162;
+ --walnut: #726953;
+ --gray: #76877D;
+ --lightBlue: #82A6B1;
+}
+
+body {
+    font-family: 'Josefin Slab', serif;
+    color: whitesmoke;
+    background-color: var(--lightBlue);
+}
+
+.display-4 {
+ background-color: var(--indigo);
+}
+
+#cityName {
+background-color: var(--gray) 0.75;
+
+}
+
+.col {
+    background-color: var(--darkBlue);
+    padding: 2%;
+    margin: 1%;
+}
+
+/* How do I get the header to stretch all the way across? */
+#forecastHeader {
+    padding: 1%;
+    margin: 1%;
+    min-width: 100%;
+}
