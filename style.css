@@ -38,3 +38,28 @@ background-color: var(--gray) 0.75;
     margin: 1%;
     min-width: 100%;
 }
+
+#headerColor {
+    display: block;
+    background-color: var(--indigo);
+    margin: 0 auto;
+}
+
+.fullwidth {
+    width: 100%;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 1%;
+    margin-bottom: .5%;
+    padding-left: 0;
+    padding-right: 0;
+    display: block;
+    text-align: center;
+}
+
+/* How do I change the color of this line? */
+hr {
+    border-top: 8px solid #bbb;
+    border-radius: 5px;
+    background-color: var(--gray);
+  }

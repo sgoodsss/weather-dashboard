@@ -11,25 +11,32 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- My Stylesheet -->
     <link rel="stylesheet" href="style.css">
-    
     <title>5 Day Weather Forecast</title>
   </head>
 
   <body>
-
+    <!-- Need Help Styling this element -->
    <div id="header" class="container">
-    <div class="row">
+    <div id="headerColor" class="row">
         <h1 class="display-4">Weather Dashboard</h1>
     </div>
 
   <div class="row">
     <div class="col-4">
       <h2>Search for a City:</h2>
-      <input type="text" id="cityName">
-      <!-- how do I get this under my text input -->
-      <button type="button" class="btn btn-primary btn-lg">Search</button>
-      <!-- Then I need 8 other secondary buttons of other popular cities, but I want to do that in JS -->
-      <div id="emptyDiv"> </div>
+      <input type="text" id="cityName" class="fullwidth">
+      <button type="button" class="btn btn-primary btn-lg fullwidth">Search</button>
+      <hr class="rounded">
+      <div id="cityButtons"> 
+        <button type="button" class="btn btn-secondary btn-lg fullwidth">Atlanta</button>
+        <button type="button" class="btn btn-secondary btn-lg fullwidth">Denver</button>
+        <button type="button" class="btn btn-secondary btn-lg fullwidth">Seattle</button>
+        <button type="button" class="btn btn-secondary btn-lg fullwidth">San Francisco</button>
+        <button type="button" class="btn btn-secondary btn-lg fullwidth">Orlando</button>
+        <button type="button" class="btn btn-secondary btn-lg fullwidth">New York</button>
+        <button type="button" class="btn btn-secondary btn-lg fullwidth">Chicago</button>
+        <button type="button" class="btn btn-secondary btn-lg fullwidth">Austin</button>
+      </div>
     </div>
 
     <div class="col-8">
@@ -82,7 +89,7 @@
 <!-- API CALL -->
 <!-- api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=b98ec477e026dbcba46222f669c18788 -->
 
-<!-- Geocoding API -->
-<!-- Coverts city names to coordinates -->
-<!-- api.openweathermap.org/data/2.5/forecast?q={city name}&appid=b98ec477e026dbcba46222f669c18788 -->
+<!-- Geocoding API
+Coverts city names to coordinates
+api.openweathermap.org/data/2.5/forecast?q={city name}&appid=b98ec477e026dbcba46222f669c18788 -->
 
