@@ -39,8 +39,10 @@ function getWeather(city) {
     
     fetch(apiCityURL)
       .then(function (response) {
-        response.json().then(function(data){
-
+        response.json()
+      .then(function(data){
+        console.log(`Sarah is the smartest`)
+        // Not working
         })
       })
 
@@ -70,15 +72,6 @@ buttons.forEach(function (button) {
   var button = new bootstrap.Button(button)
   button.toggle()
 });
-
-
-// var getWeather = () => {
-//   // Hard coded in Chicago to test it
-//   fetch(api.openweathermap.org/data/2.5/forecast?q=Chicago&appid=b98ec477e026dbcba46222f669c18788)
-//   .then(response => response.json())
-//   // Don't know what to put here???
-//   .then()
-// }
 
 // Get Weather By City Search Bar
 // searchButton.addEventListener(`search`, (event) => {
