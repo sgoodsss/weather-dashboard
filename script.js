@@ -1,9 +1,8 @@
 // GLOBAL VARIABLES 
 // Selects City Name Input
 var searchTextEl = document.getElementById("cityName");
-console.log(searchTextEl)
 // Selects Search Button
-var searchButton = document.getElementsByClassName("btn-primary");
+var searchButton = document.getElementById("searchButton");
 // Selects City Name Box Header
 var cityNameInfo = document.getElementById("cityNameInfo").firstChild;
 // Selects list of city name elements
@@ -21,34 +20,34 @@ var openWeatherCityUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=';
 
 // TODO:
 // when user searches for a city (clicks search button):
+// Validate user input
 //  - store the user input in a variable
 //  - use a fetch api to get the current & future conditions for that city
 //  - store that city into local storage
 
-//Function to get weather data from apiUrl
-function getWeather(city) {
-  // Click event for search button
-  searchButton.addEventListener(`click`, function () {
-    // Makes first letter of the user input capital
-    var str = searchTextEl.value;
-    var str2 = str.charAt(0).toUpperCase() + str.slice(1);
-    console.log(str2);
+// Function to get weather data from apiUrl
+// function getWeather(city) {
+//   // Click event for search button
+//   searchButton.addEventListener(`click`, function () {
+//     // Makes first letter of the user input capital
+//     var str = searchTextEl.value;
+//     var str2 = str.charAt(0).toUpperCase() + str.slice(1);
+//     console.log(str2);
 
-    // API URL for city
-    var apiCityUrl = openWeatherCityUrl + str2 + '&appid=' + openWeatherApiKey;
+//     // API URL for city
+//     var apiCityUrl = openWeatherCityUrl + str2 + '&appid=' + openWeatherApiKey;
     
-    fetch(apiCityURL)
-      .then(function (response) {
-        response.json()
-      .then(function(data){
-        console.log(`Sarah is the smartest`)
-        // Not working
-        })
-      })
-
-})
-}
-
+//     // Need help with this
+//     fetch(apiCityURL)
+//       .then(function (response) {
+//         response.json()
+//       .then(function(data){
+//         console.log(`Sarah is the smartest`)
+//         // Not working
+//         })
+//       })
+// })
+// }
 
 
 // use the data from fetch to populate in the current-weather container:

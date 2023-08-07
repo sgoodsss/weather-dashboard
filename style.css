@@ -15,6 +15,14 @@ body {
     font-family: 'Josefin Slab', serif;
     color: whitesmoke;
     background-color: var(--lightBlue);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: block;
+    background-color: var(--indigo);
+    margin: 0 auto;
 }
 
 .display-4 {
@@ -32,19 +40,6 @@ background-color: var(--gray) 0.75;
     margin: 1%;
 }
 
-/* How do I get the header to stretch all the way across? */
-#forecastHeader {
-    padding: 1%;
-    margin: 1%;
-    min-width: 100%;
-}
-
-#headerColor {
-    display: block;
-    background-color: var(--indigo);
-    margin: 0 auto;
-}
-
 .fullwidth {
     width: 100%;
     margin-left: 1%;
@@ -59,7 +54,6 @@ background-color: var(--gray) 0.75;
 
 /* How do I change the color of this line? */
 hr {
-    border-top: 8px solid #bbb;
+    border-top: 8px solid var(--gray);
     border-radius: 5px;
-    background-color: var(--gray);
   }
