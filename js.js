@@ -63,8 +63,19 @@ function printForecastData(forecastData) {
   console.log(forecastData)
   console.log(forecastData[0].main.temp)
   for (let i = 0; i < fiveDayBoxes.length; i++) {
+    // Changes Content of Date on 5 Day Forecast Section
+
+       // HOW DO YOU FORMAT THE DATE?
+
    fiveDayBoxes[i].children[0].textContent = forecastData[i].dt_txt
-   fiveDayBoxes[i].children[1].children[0] = 
-    console.log(fiveDayBoxes[i].children)
+  //  fiveDayBoxes[i].children[0].textContent.format(MM/DD/YYYY)
+
+    // Changes the temperature
+  fiveDayBoxes[i].children[1].children[0].textContent = `Temp: ` + forecastData[i].main.temp + `F`
+    // Changes the wind speed
+  fiveDayBoxes[i].children[1].children[1].textContent = `Wind Speed: ` + forecastData[i].wind.speed + ` m/s`
+     // Changes the humidity
+  fiveDayBoxes[i].children[1].children[2].textContent = `Humidity: ` + forecastData[i].main.humidity + `%`
   }
 }
+

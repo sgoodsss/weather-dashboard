@@ -21,21 +21,10 @@ var openWeatherCityUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=';
 // 5 Day Weather Forecast API
 // https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=b98ec477e026dbcba46222f669c18788
 
-// TODO:
-// when user searches for a city (clicks search button):
-// Validate user input
-//  - store the user input in a variable
-//  - use a fetch api to get the current & future conditions for that city
-//  - store that city into local storage
-
 // Function to get weather data from apiUrl
 // function getWeather(city) {
 //   // Click event for search button
 //   searchButton.addEventListener(`click`, function () {
-//     // Makes first letter of the user input capital
-//     var str = searchTextEl.value;
-//     var str2 = str.charAt(0).toUpperCase() + str.slice(1);
-//     console.log(str2);
 
 //     // API URL for city
 //     var apiCityUrl = openWeatherCityUrl + str2 + '&appid=' + openWeatherApiKey;
@@ -91,5 +80,6 @@ buttons.forEach(function (button) {
 //   // getWeather(`url to get weather`)
 
 // })
+
 // Get Weather by Clicking a Gray Button
 
