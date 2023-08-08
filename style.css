@@ -23,6 +23,7 @@ header {
     display: block;
     background-color: var(--indigo);
     margin: 0 auto;
+    padding: .75%;
 }
 
 .display-4 {
@@ -54,6 +55,14 @@ background-color: var(--gray) 0.75;
 
 /* How do I change the color of this line? */
 hr {
-    border-top: 8px solid var(--gray);
+    border-top: 8px solid var(--darkBlue);
     border-radius: 5px;
+  }
+
+  h2 {
+    padding: .5%;
+  }
+  
+  #cityNameInfo {
+    padding: 1%;
   }
