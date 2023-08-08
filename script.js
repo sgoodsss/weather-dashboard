@@ -16,7 +16,10 @@ var openWeatherCityUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=';
 
 // Geocoding API
 // Coverts city names to coordinates
-// https://api.openweathermap.org/data/2.5/forecast?q={city name}&appid=b98ec477e026dbcba46222f669c18788
+// http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=b98ec477e026dbcba46222f669c18788
+
+// 5 Day Weather Forecast API
+// https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=b98ec477e026dbcba46222f669c18788
 
 // TODO:
 // when user searches for a city (clicks search button):
