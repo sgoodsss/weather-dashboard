@@ -72,9 +72,10 @@ function getWeather(city) {
               .then(function (weatherResponse) {
                 weatherResponse.json()
                   .then(function (weatherData) {
+
                     // CURRENT DAY DISPLAY
                     console.log(weatherData)
-                    // Get current weather emoji
+                    // Get current weather emoji.  Something isn't working right
                     console.log(emptyCurrentVariable)
                     var weatherIcon = emptyCurrentVariable[0].weather[0].icon
                     var cityCurrentWeatherIcon = weatherIconUrl + weatherIcon + '.png';
@@ -85,9 +86,9 @@ function getWeather(city) {
                     cityNameInfo.textContent = weatherData.city.name + ` ` + dayjs().format(`MMM D, YYYY`) + ` ` + cityCurrentWeatherIcon
 
                     // Display the Temp, Wind, and Humidity on cityList
-                    cityList.children[0].textContent = weatherData.list[0].main.temp + ` F`
-                    cityList.children[1].textContent = weatherData.list[0].wind.speed + ` m/s`
-                    cityList.children[2].textContent = weatherData.list[0].main.humidity + `%`
+                    cityList.children[0].textContent = `Temp: ` + weatherData.list[0].main.temp + ` F`
+                    cityList.children[1].textContent = `Wind Speed: ` + weatherData.list[0].wind.speed + ` m/s`
+                    cityList.children[2].textContent = `Humidity: ` + weatherData.list[0].main.humidity + `%`
 
                   })
 
