@@ -82,20 +82,3 @@ buttons.forEach(function (button) {
 // })
 
 // Get Weather by Clicking a Gray Button
-
-
-// Uses city coordinates to get current weather forecast
-function getCurrentWeather(pullCurrentData) {
-  var {lat, lon} = pullCurrentData
-  var city = pullCurrentData.name
-  var apiCityURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=b98ec477e026dbcba46222f669c18788&units=imperial`
-  fetch(apiCityURL)
-    .then(function (response) {
-      response.json()
-      .then(function (data) {
-        // create an empty variable to push current weather data into
-        var dailyEmptyVariable = []
-        console.log(data.list)
-      })
-    })
-}
