@@ -55,6 +55,8 @@ var openWeatherCityUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=';
 //  - the temp
 //  - wind speed
 
+// use data in local.storage to create a button under the <hr> in search area for city history
+//  - when you click the button it displays the current and future conditions for that city
 //  - when you click the button it displays the current and future conditions for that city
 
 // Toggles all buttons using Bootstrap

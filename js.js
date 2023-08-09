@@ -13,19 +13,16 @@ function inputValidate(event) {
 
     var search = searchTextEl.value.trim();
     getCoordinates(search);
-    // console.log(search)
     searchTextEl.value = " ";
 }
 // Get city coordinates via API
 function getCoordinates(search) {
-    console.log(search)
     var apiCityURL = `http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=b98ec477e026dbcba46222f669c18788`
     fetch(apiCityURL)
       .then(function (response) {
         // Stores response in JSON object
             response.json()
           .then(function(data){
-            console.log(data)
             // Retrieves first city result of our data object
             getFutureWeather(data[0])
             })
@@ -38,20 +35,22 @@ function getCurrentWeather(pullCurrentData) {
   var city = pullCurrentData.name
   var apiCityURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=b98ec477e026dbcba46222f669c18788&units=imperial`
   fetch(apiCityURL)
-    .then(function (response) {
-      response.json()
-      .then(function (data) {
-        // create an empty variable to push current weather data into
-        var dailyEmptyVariable = []
-        console.log(data.list)
-      })
-    })
+      .then(function (response) {
+        // Stores response in JSON object
+            return response.json()
+          .then(function(data){
+            // Retrieves first city result of our data object
+            getCurrentWeather(data[0])
+            getFutureWeather(data[0])
+            console.log(data.list[0])
+            })
+          })
 }
 
 // Uses city coordinates to get 5 day weather forecast
 function getFutureWeather(pullData) {
   // Same as (data[0])
-    console.log(pullData)
+    // console.log(pullData)
     // Where do I put these variables??
     var {lat, lon} = pullData
     var city = pullData.name
@@ -60,7 +59,6 @@ function getFutureWeather(pullData) {
       .then(function (response) {
             response.json()
           .then(function(data){
-            console.log(data)
             // create empty varible to push 5 days of data into
             var emptyVariable = []
             var dataList = data.list;
@@ -78,8 +76,8 @@ function getFutureWeather(pullData) {
 
 // Pass through emptyVariable data into forecastData params
 function printForecastData(forecastData) {
-  console.log(forecastData)
-  console.log(forecastData[0].main.temp)
+  // console.log(forecastData)
+  // console.log(forecastData[0].main.temp)
   for (let i = 0; i < fiveDayBoxes.length; i++) {
     // Changes Content of Date on 5 Day Forecast Section
     // Changes the date
@@ -93,4 +91,4 @@ function printForecastData(forecastData) {
   }
 }
 
-// Click Event for Gray Buttons
+// Click Event for Gray History Buttons
