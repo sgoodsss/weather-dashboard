@@ -1,11 +1,18 @@
 var searchButton = document.getElementById("searchButton");
 var searchTextEl = document.getElementById("cityName");
 var fiveDayBoxes = document.getElementsByClassName("rounded");
+var clearBoxes = document.getElementById("clearText")
+var clearBorder = document.getElementById("clearBorder")
 const weatherIconUrl = 'http://openweathermap.org/img/wn/';
 // Selects City Name Box Header
 var cityNameInfo = document.getElementById("cityNameInfo").firstChild;
 // Selects list of city name elements
 var cityList = document.getElementById("cityList");
+
+// // Clears out elements... how do I make it come back?
+// cityNameInfo.textContent = `Type the name of a city in the search bar!`;
+// cityList.textContent = ``;
+// clearBoxes.textContent = ``;
 
 // Click Event for Search Button 
 searchButton.addEventListener(`click`, inputValidate)

@@ -23,16 +23,16 @@
     <div class="col-4">
       <h2>Search for a City:</h2>
       <input type="text" id="cityName" class="fullwidth">
-      <button id="searchButton" type="button" class="btn btn-primary btn-lg fullwidth">Search</button>
+      <button onclick="showElements()" id="searchButton" type="button" class="btn btn-primary btn-lg fullwidth">Search</button>
       <hr>
       <div id="cityHistoryButtons"> 
         <button type="button" class="btn btn-secondary btn-lg fullwidth" id="Atlanta">Atlanta</button>
       </div>
     </div>
-
-    <div class="col-8">
+    
+    <div id='hiddenEl' class="col-8">
       <div class="row">
-        <div class="border">
+        <div id="clearBorder" class="border">
             <h2 id="cityNameInfo">City Name Date and Graphic</h2>
             <ul id="cityList">
                 <li>Temp</li>
@@ -41,7 +41,7 @@
             </ul>
         </div>
 
-        <div class="row">
+        <div id="clearText" class="row">
             <h2 id="forecastHeader">5 Day Forecast</h2>
             <div class="col rounded">
                 <h3>Date</h3>
