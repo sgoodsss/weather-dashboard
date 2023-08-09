@@ -7,24 +7,26 @@ var cityNameInfo = document.getElementById("cityNameInfo").firstChild;
 // Selects list of city name elements
 var cityList = document.getElementById("cityList");
 
+ // Click Event for Search Button 
+ searchButton.addEventListener(`click`, inputValidate)
+ // Validates input
+ function inputValidate(event) {
+   if (!searchTextEl.value) {
+     return;
+   }
+   event.preventDefault();
+
+   var search = searchTextEl.value.trim();
+   getWeather(search);
+   searchTextEl.value = " ";
+ }
+
 // Gets ALL weather data from API
 function getWeather(city) {
 
-  // Click Event for Search Button 
-  searchButton.addEventListener(`click`, inputValidate)
-  // Validates input
-  function inputValidate(event) {
-    if (!searchTextEl.value) {
-      return;
-    }
-    event.preventDefault();
-
-    var search = searchTextEl.value.trim();
-    getCoordinates(search);
-    searchTextEl.value = " ";
-  }
-
   // Get city coordinates via API
+  getCoordinates(city);
+
   function getCoordinates(search) {
     var apiCityURL = `http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=b98ec477e026dbcba46222f669c18788`
     fetch(apiCityURL)
@@ -64,11 +66,25 @@ function getWeather(city) {
             }
 
             // Create new function for printing the results in HTML
-            printForecastData(emptyVariable)
+            printForecastData(emptyFutureVariable)
 
-            // CURRENT DAY DISPLAY
+            fetch(apiCoordinateURL)
+              .then(function (weatherResponse) {
+                weatherResponse.json()
+                .then(function (weatherData) {
+                  // CURRENT DAY DISPLAY
+
+                  // Get weather emoji
+                  console.log(emptyCurrentVariable)
+                  var weatherIcon = emptyCurrentVariable[0].weather[0].icon
+                  var cityCurrentWeatherIcon = weatherIconUrl + weatherIcon + '.png';
+                  console.log (cityCurrentWeatherIcon)
+
+
+                })
+
+              })
             
-
           })
       })
   }
