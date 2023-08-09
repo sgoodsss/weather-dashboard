@@ -7,19 +7,19 @@ var cityNameInfo = document.getElementById("cityNameInfo").firstChild;
 // Selects list of city name elements
 var cityList = document.getElementById("cityList");
 
- // Click Event for Search Button 
- searchButton.addEventListener(`click`, inputValidate)
- // Validates input
- function inputValidate(event) {
-   if (!searchTextEl.value) {
-     return;
-   }
-   event.preventDefault();
+// Click Event for Search Button 
+searchButton.addEventListener(`click`, inputValidate)
+// Validates input
+function inputValidate(event) {
+  if (!searchTextEl.value) {
+    return;
+  }
+  event.preventDefault();
 
-   var search = searchTextEl.value.trim();
-   getWeather(search);
-   searchTextEl.value = " ";
- }
+  var search = searchTextEl.value.trim();
+  getWeather(search);
+  searchTextEl.value = " ";
+}
 
 // Gets ALL weather data from API
 function getWeather(city) {
@@ -71,40 +71,48 @@ function getWeather(city) {
             fetch(apiCoordinateURL)
               .then(function (weatherResponse) {
                 weatherResponse.json()
-                .then(function (weatherData) {
-                  // CURRENT DAY DISPLAY
+                  .then(function (weatherData) {
+                    // CURRENT DAY DISPLAY
+                    console.log(weatherData)
+                    // Get current weather emoji
+                    console.log(emptyCurrentVariable)
+                    var weatherIcon = emptyCurrentVariable[0].weather[0].icon
+                    var cityCurrentWeatherIcon = weatherIconUrl + weatherIcon + '.png';
+                    console.log(cityCurrentWeatherIcon)
 
-                  // Get weather emoji
-                  console.log(emptyCurrentVariable)
-                  var weatherIcon = emptyCurrentVariable[0].weather[0].icon
-                  var cityCurrentWeatherIcon = weatherIconUrl + weatherIcon + '.png';
-                  console.log (cityCurrentWeatherIcon)
+                    // Display the City Name, Date, and cityCurrentWeatherIcon on cityNameInfo
+                    // NEED TO FIX ICON
+                    cityNameInfo.textContent = weatherData.city.name + ` ` + dayjs().format(`MMM D, YYYY`) + ` ` + cityCurrentWeatherIcon
 
+                    // Display the Temp, Wind, and Humidity on cityList
+                    cityList.children[0].textContent = weatherData.list[0].main.temp + ` F`
+                    cityList.children[1].textContent = weatherData.list[0].wind.speed + ` m/s`
+                    cityList.children[2].textContent = weatherData.list[0].main.humidity + `%`
 
-                })
+                  })
 
               })
-            
+
           })
       })
   }
 
   // Pass through emptyVariable data into forecastData params
-function printForecastData(forecastData) {
-  // console.log(forecastData)
-  // console.log(forecastData[0].main.temp)
-  for (let i = 0; i < fiveDayBoxes.length; i++) {
-    // Changes Content of Date on 5 Day Forecast Section
-    // Changes the date
-    fiveDayBoxes[i].children[0].textContent = dayjs().format('M/D/YYYY');
-    // Changes the temperature
-    fiveDayBoxes[i].children[1].children[0].textContent = `Temp: ` + forecastData[i].main.temp + `F`
-    // Changes the wind speed
-    fiveDayBoxes[i].children[1].children[1].textContent = `Wind Speed: ` + forecastData[i].wind.speed + ` m/s`
-    // Changes the humidity
-    fiveDayBoxes[i].children[1].children[2].textContent = `Humidity: ` + forecastData[i].main.humidity + `%`
+  function printForecastData(forecastData) {
+    // console.log(forecastData)
+    // console.log(forecastData[0].main.temp)
+    for (let i = 0; i < fiveDayBoxes.length; i++) {
+      // Changes Content of Date on 5 Day Forecast Section
+      // Changes the date
+      fiveDayBoxes[i].children[0].textContent = dayjs().format('M/D/YYYY');
+      // Changes the temperature
+      fiveDayBoxes[i].children[1].children[0].textContent = `Temp: ` + forecastData[i].main.temp + ` F`
+      // Changes the wind speed
+      fiveDayBoxes[i].children[1].children[1].textContent = `Wind Speed: ` + forecastData[i].wind.speed + ` m/s`
+      // Changes the humidity
+      fiveDayBoxes[i].children[1].children[2].textContent = `Humidity: ` + forecastData[i].main.humidity + `%`
+    }
   }
-}
   // end of wrapped function
 }
 
