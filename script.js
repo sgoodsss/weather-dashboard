@@ -13,6 +13,8 @@ var fiveDayBoxes = document.getElementsByClassName("rounded");
 var openWeatherApiKey = 'b98ec477e026dbcba46222f669c18788';
 // URL to fetch data by city name
 var openWeatherCityUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=';
+// Weather Icon Link from Open Weather Map
+const weatherIconUrl = 'http://openweathermap.org/img/wn/';
 
 // Geocoding API
 // Coverts city names to coordinates
