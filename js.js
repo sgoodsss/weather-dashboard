@@ -3,7 +3,7 @@ var searchTextEl = document.getElementById("cityName");
 var fiveDayBoxes = document.getElementsByClassName("rounded");
 
 // Click Event for Search Button 
-searchButton.addEventListener(`click`, inputValidate)
+searchButton.addEventListener(`click`, inputValidate) 
 // Validates input
 function inputValidate(event) {
     if (!searchTextEl.value) {
@@ -64,12 +64,8 @@ function printForecastData(forecastData) {
   console.log(forecastData[0].main.temp)
   for (let i = 0; i < fiveDayBoxes.length; i++) {
     // Changes Content of Date on 5 Day Forecast Section
-
-       // HOW DO YOU FORMAT THE DATE?
-
-   fiveDayBoxes[i].children[0].textContent = forecastData[i].dt_txt
-  //  fiveDayBoxes[i].children[0].textContent.format(MM/DD/YYYY)
-
+    // Changes the date
+    fiveDayBoxes[i].children[0].textContent = dayjs().format('M/D/YYYY');
     // Changes the temperature
   fiveDayBoxes[i].children[1].children[0].textContent = `Temp: ` + forecastData[i].main.temp + `F`
     // Changes the wind speed
@@ -79,3 +75,4 @@ function printForecastData(forecastData) {
   }
 }
 
+// Click Event for Gray Buttons
