@@ -3,7 +3,6 @@ var searchTextEl = document.getElementById("cityName");
 var fiveDayBoxes = document.getElementsByClassName("rounded");
 var clearBoxes = document.getElementById("clearText")
 var clearBorder = document.getElementById("clearBorder")
-const weatherIconUrl = 'http://openweathermap.org/img/wn/';
 // Selects City Name Box Header
 var cityNameInfo = document.getElementById("cityNameInfo").firstChild;
 // Selects list of city name elements
@@ -13,6 +12,15 @@ var cityList = document.getElementById("cityList");
 // cityNameInfo.textContent = `Type the name of a city in the search bar!`;
 // cityList.textContent = ``;
 // clearBoxes.textContent = ``;
+
+function showElements() {
+  var x = document.getElementById("hiddenEl");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
 
 // Click Event for Search Button 
 searchButton.addEventListener(`click`, inputValidate)
@@ -81,16 +89,14 @@ function getWeather(city) {
                   .then(function (weatherData) {
 
                     // CURRENT DAY DISPLAY
-                    console.log(weatherData)
-                    // Get current weather emoji.  Something isn't working right
-                    console.log(emptyCurrentVariable)
-                    var weatherIcon = emptyCurrentVariable[0].weather[0].icon
-                    var cityCurrentWeatherIcon = weatherIconUrl + weatherIcon + '.png';
-                    console.log(cityCurrentWeatherIcon)
+
+                    //Gets the current weather icon
+                    let locationIcon = document.querySelector('.weather-icon');
+                    const icon = emptyCurrentVariable[0].weather[0].icon;
+                    locationIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${icon}.png">`
 
                     // Display the City Name, Date, and cityCurrentWeatherIcon on cityNameInfo
-                    // NEED TO FIX ICON
-                    cityNameInfo.textContent = weatherData.city.name + ` ` + dayjs().format(`MMM D, YYYY`) + ` ` + cityCurrentWeatherIcon
+                    cityNameInfo.textContent = weatherData.city.name + ` ` + dayjs().format(`MMM D, YYYY`)
 
                     // Display the Temp, Wind, and Humidity on cityList
                     cityList.children[0].textContent = `Temp: ` + weatherData.list[0].main.temp + ` F`
@@ -111,7 +117,7 @@ function getWeather(city) {
     // console.log(forecastData[0].main.temp)
     for (let i = 0; i < fiveDayBoxes.length; i++) {
       // Changes Content of Date on 5 Day Forecast Section
-      // Changes the date
+      // Changes the date FIX THIS
       fiveDayBoxes[i].children[0].textContent = dayjs().format('M/D/YYYY');
       // Changes the temperature
       fiveDayBoxes[i].children[1].children[0].textContent = `Temp: ` + forecastData[i].main.temp + ` F`
