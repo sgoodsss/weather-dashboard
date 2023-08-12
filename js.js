@@ -114,17 +114,46 @@ function getWeather(city) {
   // Pass through emptyVariable data into forecastData params
   function printForecastData(forecastData) {
     // console.log(forecastData)
-    // console.log(forecastData[0].main.temp)
+    // Changes the Date
+    getFutureDates();
     for (let i = 0; i < fiveDayBoxes.length; i++) {
       // Changes Content of Date on 5 Day Forecast Section
-      // Changes the date FIX THIS
-      fiveDayBoxes[i].children[0].textContent = dayjs().format('M/D/YYYY');
       // Changes the temperature
       fiveDayBoxes[i].children[1].children[0].textContent = `Temp: ` + forecastData[i].main.temp + ` F`
       // Changes the wind speed
       fiveDayBoxes[i].children[1].children[1].textContent = `Wind Speed: ` + forecastData[i].wind.speed + ` m/s`
       // Changes the humidity
       fiveDayBoxes[i].children[1].children[2].textContent = `Humidity: ` + forecastData[i].main.humidity + `%`
+    }
+      // HELP- how do I push the date into my h3
+    function getFutureDates() {
+      // Declare a date variable set to current date/time:
+      let dt = new Date();
+      // Box 1
+      var dt0 = dt.setDate(dt.getDate() + 1)
+      dt0 =  dayjs().format('M/D/YYYY')
+      let string1 = dt0.toString();
+      fiveDayBoxes[0].children[0].innerHTML = `<h3>${string1}</h3>`
+
+      // Box 2
+      var dt1 = dt.setDate(dt.getDate() + 2)
+      dt1 =  dayjs().format('M/D/YYYY')
+      fiveDayBoxes[1].children[0].textContent = dt1
+
+      // Box 3
+      var dt2 = dt.setDate(dt.getDate() + 3)
+      dt2 =  dayjs().format('M/D/YYYY')
+      fiveDayBoxes[2].children[0].textContent = dt2
+
+      // Box 4
+      var dt3 = dt.setDate(dt.getDate() + 4)
+      dt3 =  dayjs().format('M/D/YYYY')
+      fiveDayBoxes[3].children[0].textContent = dt3
+
+      // Box 5
+      var dt4 = dt.setDate(dt.getDate() + 5)
+      dt4 =  dayjs().format('M/D/YYYY')
+      fiveDayBoxes[4].children[0].textContent = dt4
     }
   }
   // end of wrapped function
