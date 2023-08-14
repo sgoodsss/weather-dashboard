@@ -69,20 +69,28 @@ function getWeather(city) {
             // create empty varible to push 5 days of data into
             var emptyFutureVariable = []
             var emptyCurrentVariable = []
+            var emptyAllFutureVariable = []
             var dataList = data.list;
 
             // For current forecast
             var pushCurrentData = dataList[0]
             emptyCurrentVariable.push(pushCurrentData)
 
-            // For future forecast days
+            // For future forecast days (5)
             for (let i = 1; i < dataList.length; i += 8) {
               var pushFutureData = dataList[i];
               emptyFutureVariable.push(pushFutureData);
             }
 
+            // For all Future Forecast Days
+            var pushAllFutureData = dataList[i];
+            emptyAllFutureVariable.push(pushAllFutureData)
+
             // Create new function for printing the results in HTML
             printForecastData(emptyFutureVariable)
+
+            // Create new function for printing date in HTML
+            printFutureForecastDate(emptyAllFutureVariable)
 
             fetch(apiCoordinateURL)
               .then(function (weatherResponse) {
@@ -111,12 +119,22 @@ function getWeather(city) {
           })
       })
   }
+  
+  function printFutureForecastDate (forecastDateData) {
+    $('#day1').text(dayjs.unix(data.list[7].dt).format('M/D/YY'))
+    $('#day2').text(dayjs.unix(data.list[15].dt).format('M/D/YY'))
+    $('#day3').text(dayjs.unix(data.list[23].dt).format('M/D/YY'))
+    $('#day4').text(dayjs.unix(data.list[31].dt).format('M/D/YY'))
+    $('#day5').text(dayjs.unix(data.list[39].dt).format('M/D/YY'))
+
+  }
 
   // Pass through emptyVariable data into forecastData params
   function printForecastData(forecastData) {
     // console.log(forecastData)
     // Changes the Date
-    getFutureDates();
+    // getFutureDates();
+  
     for (let i = 0; i < fiveDayBoxes.length; i++) {
       // Changes Content of Date on 5 Day Forecast Section
       // Changes the temperature
@@ -127,36 +145,38 @@ function getWeather(city) {
       fiveDayBoxes[i].children[1].children[2].textContent = `Humidity: ` + forecastData[i].main.humidity + `%`
     }
       // HELP- how do I push the date into my h3
-    function getFutureDates() {
-      // Declare a date variable set to current date/time:
-      let dt = new Date();
-      // Box 1
-      var dt0 = dt.setDate(dt.getDate() + 1)
-      dt0 =  dayjs().format('M/D/YYYY')
-      let string1 = dt0.toString();
-      fiveDayBoxes[0].children[0].innerHTML = `<h3>${string1}</h3>`
+  //   function getFutureDates() {
+  //     fetch()
+  //     // Declare a date variable set to current date/time:
+  //     let dt = new Date();
+  //     // Box 1
+  //     var dt0 = dt.setDate(dt.getDate() + 1)
+  //     dt0 =  dayjs().format('M/D/YYYY')
+  //     console.log(dt0)
+  //     let string1 = dt0.toString();
+  //     fiveDayBoxes[0].children[0].innerHTML = `<h3>${string1}</h3>`
 
-      // Box 2
-      var dt1 = dt.setDate(dt.getDate() + 2)
-      dt1 =  dayjs().format('M/D/YYYY')
-      fiveDayBoxes[1].children[0].textContent = dt1
+  //     // Box 2
+  //     var dt1 = dt.setDate(dt.getDate() + 2)
+  //     dt1 =  dayjs().format('M/D/YYYY')
+  //     fiveDayBoxes[1].children[0].textContent = dt1
 
-      // Box 3
-      var dt2 = dt.setDate(dt.getDate() + 3)
-      dt2 =  dayjs().format('M/D/YYYY')
-      fiveDayBoxes[2].children[0].textContent = dt2
+  //     // Box 3
+  //     var dt2 = dt.setDate(dt.getDate() + 3)
+  //     dt2 =  dayjs().format('M/D/YYYY')
+  //     fiveDayBoxes[2].children[0].textContent = dt2
 
-      // Box 4
-      var dt3 = dt.setDate(dt.getDate() + 4)
-      dt3 =  dayjs().format('M/D/YYYY')
-      fiveDayBoxes[3].children[0].textContent = dt3
+  //     // Box 4
+  //     var dt3 = dt.setDate(dt.getDate() + 4)
+  //     dt3 =  dayjs().format('M/D/YYYY')
+  //     fiveDayBoxes[3].children[0].textContent = dt3
 
-      // Box 5
-      var dt4 = dt.setDate(dt.getDate() + 5)
-      dt4 =  dayjs().format('M/D/YYYY')
-      fiveDayBoxes[4].children[0].textContent = dt4
-    }
-  }
+  //     // Box 5
+  //     var dt4 = dt.setDate(dt.getDate() + 5)
+  //     dt4 =  dayjs().format('M/D/YYYY')
+  //     fiveDayBoxes[4].children[0].textContent = dt4
+  //   }
+  // }
   // end of wrapped function
 }
 
