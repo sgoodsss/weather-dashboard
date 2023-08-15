@@ -31,8 +31,11 @@ function inputValidate(event) {
     return;
   }
   event.preventDefault();
-
+  // Set item in localstorage
+  var cityArray = [];
   var search = searchTextEl.value.trim();
+  cityArray.push(search)
+  localStorage.setItem("cityName", cityArray)
   getWeather(search);
   searchTextEl.value = " ";
 }
@@ -126,35 +129,29 @@ function getWeather(city) {
       // Changes the humidity
       fiveDayBoxes[i].children[1].children[2].textContent = `Humidity: ` + forecastData[i].main.humidity + `%`
     }
-      // HELP- how do I push the date into my h3
+
     function getFutureDates() {
       // Declare a date variable set to current date/time:
-      let dt = new Date();
+      let dt = dayjs()
       // Box 1
-      var dt0 = dt.setDate(dt.getDate() + 1)
-      dt0 =  dayjs().format('M/D/YYYY')
-      let string1 = dt0.toString();
-      fiveDayBoxes[0].children[0].innerHTML = `<h3>${string1}</h3>`
+      var dt0 = dt.add(1, "day").format('M/D/YYYY');
+      fiveDayBoxes[0].children[0].innerHTML = `<h3>${dt0}</h3>`
 
       // Box 2
-      var dt1 = dt.setDate(dt.getDate() + 2)
-      dt1 =  dayjs().format('M/D/YYYY')
-      fiveDayBoxes[1].children[0].textContent = dt1
+      var dt1 = dt.add(2, "day").format('M/D/YYYY');
+      fiveDayBoxes[1].children[0].innerHTML = `<h3>${dt1}</h3>`
 
       // Box 3
-      var dt2 = dt.setDate(dt.getDate() + 3)
-      dt2 =  dayjs().format('M/D/YYYY')
-      fiveDayBoxes[2].children[0].textContent = dt2
+      var dt2 = dt.add(3, "day").format('M/D/YYYY');
+      fiveDayBoxes[2].children[0].innerHTML = `<h3>${dt2}</h3>`
 
       // Box 4
-      var dt3 = dt.setDate(dt.getDate() + 4)
-      dt3 =  dayjs().format('M/D/YYYY')
-      fiveDayBoxes[3].children[0].textContent = dt3
+      var dt3 = dt.add(4, "day").format('M/D/YYYY');
+      fiveDayBoxes[3].children[0].innerHTML = `<h3>${dt3}</h3>`
 
       // Box 5
-      var dt4 = dt.setDate(dt.getDate() + 5)
-      dt4 =  dayjs().format('M/D/YYYY')
-      fiveDayBoxes[4].children[0].textContent = dt4
+      var dt4 = dt.add(5, "day").format('M/D/YYYY');
+      fiveDayBoxes[4].children[0].innerHTML = `<h3>${dt4}</h3>`
     }
   }
   // end of wrapped function
@@ -173,10 +170,12 @@ function getCurrentWeather(pullCurrentData) {
           // Retrieves first city result of our data object
           getCurrentWeather(data[0])
           getFutureWeather(data[0])
-          console.log(data.list[0])
+          createHistoryButtons()
         })
     })
 }
 
-
+function createHistoryButtons () {
+  var oldCityNames = localStorage.getItem()
+}
 // Click Event for Gray History Buttons
