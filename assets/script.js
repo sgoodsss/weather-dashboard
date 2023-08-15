@@ -72,20 +72,28 @@ function getWeather(city) {
             // create empty varible to push 5 days of data into
             var emptyFutureVariable = []
             var emptyCurrentVariable = []
+            var emptyAllFutureVariable = []
             var dataList = data.list;
 
             // For current forecast
             var pushCurrentData = dataList[0]
             emptyCurrentVariable.push(pushCurrentData)
 
-            // For future forecast days
+            // For future forecast days (5)
             for (let i = 1; i < dataList.length; i += 8) {
               var pushFutureData = dataList[i];
               emptyFutureVariable.push(pushFutureData);
             }
 
+            // For all Future Forecast Days
+            var pushAllFutureData = dataList[i];
+            emptyAllFutureVariable.push(pushAllFutureData)
+
             // Create new function for printing the results in HTML
             printForecastData(emptyFutureVariable)
+
+            // Create new function for printing date in HTML
+            printFutureForecastDate(emptyAllFutureVariable)
 
             fetch(apiCoordinateURL)
               .then(function (weatherResponse) {
@@ -114,12 +122,22 @@ function getWeather(city) {
           })
       })
   }
+  
+  function printFutureForecastDate (forecastDateData) {
+    $('#day1').text(dayjs.unix(data.list[7].dt).format('M/D/YY'))
+    $('#day2').text(dayjs.unix(data.list[15].dt).format('M/D/YY'))
+    $('#day3').text(dayjs.unix(data.list[23].dt).format('M/D/YY'))
+    $('#day4').text(dayjs.unix(data.list[31].dt).format('M/D/YY'))
+    $('#day5').text(dayjs.unix(data.list[39].dt).format('M/D/YY'))
+
+  }
 
   // Pass through emptyVariable data into forecastData params
   function printForecastData(forecastData) {
     // console.log(forecastData)
     // Changes the Date
-    getFutureDates();
+    // getFutureDates();
+  
     for (let i = 0; i < fiveDayBoxes.length; i++) {
       // Changes Content of Date on 5 Day Forecast Section
       // Changes the temperature
