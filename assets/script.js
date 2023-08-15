@@ -8,13 +8,12 @@ var clearBorder = document.getElementById("clearBorder")
 var cityNameInfo = document.getElementById("cityNameInfo").firstChild;
 // Selects list of city name elements
 var cityList = document.getElementById("cityList");
+// Empty Array of City Names from User Search
 var cityArray = [];
+// Search History Button Container
+var historyContainerEl = document.getElementById(`cityHistoryButtons`)
 
-// // Clears out elements... how do I make it come back?
-// cityNameInfo.textContent = `Type the name of a city in the search bar!`;
-// cityList.textContent = ``;
-// clearBoxes.textContent = ``;
-
+// Delete this before submitting.  Clear out HTML manually
 function showElements() {
   var x = document.getElementById("hiddenEl");
   if (x.style.display === "block") {
@@ -32,12 +31,15 @@ function inputValidate(event) {
     return;
   }
   event.preventDefault();
-  // Set item in localstorage
+  // Trim the search element input and push it into the empty City Array
   var search = searchTextEl.value.trim();
   cityArray.push(search)
+  // Set item in localstorage
   localStorage.setItem("cityName", JSON.stringify(cityArray))
   getWeather(search);
-  createHistoryButtons();
+  for (var i = 0; i < cityArray.length; i++) {
+    createHistoryButtons(cityArray[i]);
+  }
   searchTextEl.value = " ";
 }
 
@@ -166,6 +168,17 @@ function getFutureDates() {
 }
 
 function createHistoryButtons () {
+  // Retrieves item from local storage
   var oldCityNames = localStorage.getItem("cityName")
   console.log(oldCityNames)
+    oldCityNames.forEach((city) => {
+      historyContainerEl.innerHTML += `
+      <button type="button" class="btn btn-secondary btn-lg fullwidth">${city}</button>
+      `
+    });
+    // append btn to search history div
+    historyContainerEl.append(oldCityNames);
+
+    // Add functionality on click search for the city
+    // Append button to container
 }
