@@ -8,6 +8,7 @@ var clearBorder = document.getElementById("clearBorder")
 var cityNameInfo = document.getElementById("cityNameInfo").firstChild;
 // Selects list of city name elements
 var cityList = document.getElementById("cityList");
+var cityArray = [];
 
 // // Clears out elements... how do I make it come back?
 // cityNameInfo.textContent = `Type the name of a city in the search bar!`;
@@ -32,11 +33,11 @@ function inputValidate(event) {
   }
   event.preventDefault();
   // Set item in localstorage
-  var cityArray = [];
   var search = searchTextEl.value.trim();
   cityArray.push(search)
-  localStorage.setItem("cityName", cityArray)
+  localStorage.setItem("cityName", JSON.stringify(cityArray))
   getWeather(search);
+  createHistoryButtons();
   searchTextEl.value = " ";
 }
 
@@ -72,7 +73,7 @@ function getWeather(city) {
             // create empty varible to push 5 days of data into
             var emptyFutureVariable = []
             var emptyCurrentVariable = []
-            var emptyAllFutureVariable = []
+            // var emptyAllFutureVariable = []
             var dataList = data.list;
 
             // For current forecast
@@ -86,14 +87,11 @@ function getWeather(city) {
             }
 
             // For all Future Forecast Days
-            var pushAllFutureData = dataList[i];
-            emptyAllFutureVariable.push(pushAllFutureData)
+            // var pushAllFutureData = dataList[i];
+            // emptyAllFutureVariable.push(pushAllFutureData)
 
             // Create new function for printing the results in HTML
             printForecastData(emptyFutureVariable)
-
-            // Create new function for printing date in HTML
-            printFutureForecastDate(emptyAllFutureVariable)
 
             fetch(apiCoordinateURL)
               .then(function (weatherResponse) {
@@ -122,21 +120,12 @@ function getWeather(city) {
           })
       })
   }
-  
-  function printFutureForecastDate (forecastDateData) {
-    $('#day1').text(dayjs.unix(data.list[7].dt).format('M/D/YY'))
-    $('#day2').text(dayjs.unix(data.list[15].dt).format('M/D/YY'))
-    $('#day3').text(dayjs.unix(data.list[23].dt).format('M/D/YY'))
-    $('#day4').text(dayjs.unix(data.list[31].dt).format('M/D/YY'))
-    $('#day5').text(dayjs.unix(data.list[39].dt).format('M/D/YY'))
-
-  }
 
   // Pass through emptyVariable data into forecastData params
   function printForecastData(forecastData) {
     // console.log(forecastData)
     // Changes the Date
-    // getFutureDates();
+    getFutureDates();
   
     for (let i = 0; i < fiveDayBoxes.length; i++) {
       // Changes Content of Date on 5 Day Forecast Section
@@ -147,53 +136,36 @@ function getWeather(city) {
       // Changes the humidity
       fiveDayBoxes[i].children[1].children[2].textContent = `Humidity: ` + forecastData[i].main.humidity + `%`
     }
-
-    function getFutureDates() {
-      // Declare a date variable set to current date/time:
-      let dt = dayjs()
-      // Box 1
-      var dt0 = dt.add(1, "day").format('M/D/YYYY');
-      fiveDayBoxes[0].children[0].innerHTML = `<h3>${dt0}</h3>`
-
-      // Box 2
-      var dt1 = dt.add(2, "day").format('M/D/YYYY');
-      fiveDayBoxes[1].children[0].innerHTML = `<h3>${dt1}</h3>`
-
-      // Box 3
-      var dt2 = dt.add(3, "day").format('M/D/YYYY');
-      fiveDayBoxes[2].children[0].innerHTML = `<h3>${dt2}</h3>`
-
-      // Box 4
-      var dt3 = dt.add(4, "day").format('M/D/YYYY');
-      fiveDayBoxes[3].children[0].innerHTML = `<h3>${dt3}</h3>`
-
-      // Box 5
-      var dt4 = dt.add(5, "day").format('M/D/YYYY');
-      fiveDayBoxes[4].children[0].innerHTML = `<h3>${dt4}</h3>`
-    }
   }
   // end of wrapped function
 }
 
-// Uses city coordinates to get current weather forecast
-function getCurrentWeather(pullCurrentData) {
-  var { lat, lon } = pullCurrentData
-  var city = pullCurrentData.name
-  var apiCoordinatesURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=b98ec477e026dbcba46222f669c18788&units=imperial`
-  fetch(apiCoordinatesURL)
-    .then(function (response) {
-      // Stores response in JSON object
-      return response.json()
-        .then(function (data) {
-          // Retrieves first city result of our data object
-          getCurrentWeather(data[0])
-          getFutureWeather(data[0])
-          createHistoryButtons()
-        })
-    })
+// Creates Dates of Future Days
+function getFutureDates() {
+  // Declare a date variable set to current date/time:
+  let dt = dayjs()
+  // Box 1
+  var dt0 = dt.add(1, "day").format('M/D/YYYY');
+  fiveDayBoxes[0].children[0].innerHTML = `<h3>${dt0}</h3>`
+
+  // Box 2
+  var dt1 = dt.add(2, "day").format('M/D/YYYY');
+  fiveDayBoxes[1].children[0].innerHTML = `<h3>${dt1}</h3>`
+
+  // Box 3
+  var dt2 = dt.add(3, "day").format('M/D/YYYY');
+  fiveDayBoxes[2].children[0].innerHTML = `<h3>${dt2}</h3>`
+
+  // Box 4
+  var dt3 = dt.add(4, "day").format('M/D/YYYY');
+  fiveDayBoxes[3].children[0].innerHTML = `<h3>${dt3}</h3>`
+
+  // Box 5
+  var dt4 = dt.add(5, "day").format('M/D/YYYY');
+  fiveDayBoxes[4].children[0].innerHTML = `<h3>${dt4}</h3>`
 }
 
 function createHistoryButtons () {
-  var oldCityNames = localStorage.getItem()
+  var oldCityNames = localStorage.getItem("cityName")
+  console.log(oldCityNames)
 }
-// Click Event for Gray History Buttons
