@@ -11,7 +11,7 @@ var cityList = document.getElementById("cityList");
 // Empty Array of City Names from User Search
 var cityArray = [];
 // Search History Button Container
-var historyContainerEl = document.getElementById(`cityHistoryButtons`)
+var historyContainerEl = $(`#cityHistoryButtons`)
 
 // Delete this before submitting.  Clear out HTML manually
 function showElements() {
@@ -128,7 +128,7 @@ function getWeather(city) {
     // console.log(forecastData)
     // Changes the Date
     getFutureDates();
-  
+
     for (let i = 0; i < fiveDayBoxes.length; i++) {
       // Changes Content of Date on 5 Day Forecast Section
       // Changes the temperature
@@ -167,18 +167,17 @@ function getFutureDates() {
   fiveDayBoxes[4].children[0].innerHTML = `<h3>${dt4}</h3>`
 }
 
-function createHistoryButtons () {
+// Stops working after one
+// Not sure if the click on the button works
+function createHistoryButtons() {
   // Retrieves item from local storage
   var oldCityNames = localStorage.getItem("cityName")
-  console.log(oldCityNames)
-    oldCityNames.forEach((city) => {
-      historyContainerEl.innerHTML += `
-      <button type="button" class="btn btn-secondary btn-lg fullwidth">${city}</button>
-      `
-    });
-    // append btn to search history div
-    historyContainerEl.append(oldCityNames);
 
-    // Add functionality on click search for the city
-    // Append button to container
+  var searchHistoryBtn = $(`<button>`)
+  searchHistoryBtn.addClass(`btn btn-secondary btn-lg fullwidth`);
+  searchHistoryBtn.text(oldCityNames);
+  getWeather(oldCityNames);
+  searchHistoryBtn.attr({ type: `button` });
+  // append btn to search history div
+  historyContainerEl.append(searchHistoryBtn);
 }
