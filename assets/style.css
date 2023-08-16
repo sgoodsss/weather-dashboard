@@ -66,3 +66,9 @@ hr {
   #cityNameInfo {
     padding: 1%;
   }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }

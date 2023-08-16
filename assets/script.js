@@ -4,13 +4,9 @@ var searchTextEl = document.getElementById("cityName");
 var fiveDayBoxes = document.getElementsByClassName("rounded");
 var clearBoxes = document.getElementById("clearText")
 var clearBorder = document.getElementById("clearBorder")
-// Selects City Name Box Header
 var cityNameInfo = document.getElementById("cityNameInfo").firstChild;
-// Selects list of city name elements
 var cityList = document.getElementById("cityList");
-// Empty Array of City Names from User Search
 var cityArray = [];
-// Search History Button Container
 var historyContainerEl = $(`#cityHistoryButtons`)
 
 // Delete this before submitting.  Clear out HTML manually
@@ -34,12 +30,13 @@ function inputValidate(event) {
   // Trim the search element input and push it into the empty City Array
   var search = searchTextEl.value.trim();
   cityArray.push(search)
+
   // Set item in localstorage
   localStorage.setItem("cityName", JSON.stringify(cityArray))
   getWeather(search);
-  for (var i = 0; i < cityArray.length; i++) {
-    createHistoryButtons(cityArray[i]);
-  }
+  // for (var i = 0; i < cityArray.length; i++) {
+  createHistoryButtons(cityArray);
+  // }
   searchTextEl.value = " ";
 }
 
@@ -139,6 +136,8 @@ function getWeather(city) {
       fiveDayBoxes[i].children[1].children[2].textContent = `Humidity: ` + forecastData[i].main.humidity + `%`
     }
   }
+
+
   // end of wrapped function
 }
 
@@ -169,15 +168,24 @@ function getFutureDates() {
 
 // Stops working after one
 // Not sure if the click on the button works
-function createHistoryButtons() {
+function createHistoryButtons(cityArray) {
+  console.log(cityArray)
+
   // Retrieves item from local storage
   var oldCityNames = localStorage.getItem("cityName")
+  if (oldCityNames) {
+    cityArray = JSON.parse(oldCityNames)
+  }
+  for (var i = 0; i < cityArray.length; i++) {
+    getWeather(cityArray[i]);
 
-  var searchHistoryBtn = $(`<button>`)
-  searchHistoryBtn.addClass(`btn btn-secondary btn-lg fullwidth`);
-  searchHistoryBtn.text(oldCityNames);
-  getWeather(oldCityNames);
-  searchHistoryBtn.attr({ type: `button` });
+    // Creates search button
+    // var searchHistoryBtn = $(`<button>`)
+    var searchHistoryBtn = document.createElement("button")
+    searchHistoryBtn.classList.add("btn", "btn-secondary", "btn-lg", "fullwidth");
+    searchHistoryBtn.textContent = cityArray[i];
+    searchHistoryBtn.setAttribute("type", "button");
+  }
   // append btn to search history div
   historyContainerEl.append(searchHistoryBtn);
 }
