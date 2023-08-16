@@ -40,6 +40,13 @@ function inputValidate(event) {
   searchTextEl.value = " ";
 }
 
+// Click Event for History Buttons
+// NOT WORKING
+historyContainerEl.addEventListener(`click`, function (event) {
+  searchHistoryBtn.setAttribute("value", event.target.text)
+  getWeather();
+})
+
 // Gets ALL weather data from API
 function getWeather(city) {
 
@@ -79,7 +86,7 @@ function getWeather(city) {
             var pushCurrentData = dataList[0]
             emptyCurrentVariable.push(pushCurrentData)
 
-            // For future forecast days (5)
+            // For future forecast days
             for (let i = 1; i < dataList.length; i += 8) {
               var pushFutureData = dataList[i];
               emptyFutureVariable.push(pushFutureData);
@@ -100,7 +107,7 @@ function getWeather(city) {
                     // CURRENT DAY DISPLAY
 
                     //Gets the current weather icon
-                    let locationIcon = document.querySelector('.weather-icon');
+                    let locationIcon = document.querySelector('.weather-icon1');
                     const icon = emptyCurrentVariable[0].weather[0].icon;
                     locationIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${icon}.png">`
 
@@ -126,8 +133,13 @@ function getWeather(city) {
     // Changes the Date
     getFutureDates();
 
+    // let locationIcon = document.querySelectorAll('.weather-icon');
+    // const icon = forecastData.weather[0].icon;
+    // console.log(icon)
+
     for (let i = 0; i < fiveDayBoxes.length; i++) {
-      // Changes Content of Date on 5 Day Forecast Section
+      // Changes the weather icon
+      // locationIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${icon}.png">`
       // Changes the temperature
       fiveDayBoxes[i].children[1].children[0].textContent = `Temp: ` + forecastData[i].main.temp + ` F`
       // Changes the wind speed
@@ -136,9 +148,6 @@ function getWeather(city) {
       fiveDayBoxes[i].children[1].children[2].textContent = `Humidity: ` + forecastData[i].main.humidity + `%`
     }
   }
-
-
-  // end of wrapped function
 }
 
 // Creates Dates of Future Days
@@ -166,11 +175,7 @@ function getFutureDates() {
   fiveDayBoxes[4].children[0].innerHTML = `<h3>${dt4}</h3>`
 }
 
-// Stops working after one
-// Not sure if the click on the button works
 function createHistoryButtons(cityArray) {
-  console.log(cityArray)
-
   // Retrieves item from local storage
   var oldCityNames = localStorage.getItem("cityName")
   if (oldCityNames) {
@@ -179,8 +184,7 @@ function createHistoryButtons(cityArray) {
   for (var i = 0; i < cityArray.length; i++) {
     getWeather(cityArray[i]);
 
-    // Creates search button
-    // var searchHistoryBtn = $(`<button>`)
+    // Creates Button for old searches
     var searchHistoryBtn = document.createElement("button")
     searchHistoryBtn.classList.add("btn", "btn-secondary", "btn-lg", "fullwidth");
     searchHistoryBtn.textContent = cityArray[i];
