@@ -108,10 +108,9 @@ function getWeather(city) {
     getFutureDates();
     for (let i = 0; i < fiveDayBoxes.length; i++) {
       // Changes the weather icon
-      // HELP- how do I make this icon appear??
       const icon1 = forecastData[i].weather[0].icon;
-      let locationIcon = fiveDayBoxes[i].children[1].children[0];
-      locationIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${icon1}.png">`
+      var iconEl = fiveDayBoxes[i].children[1]
+      iconEl.innerHTML = `<img src="https://openweathermap.org/img/wn/${icon1}.png">`
       // Changes the temperature
       fiveDayBoxes[i].children[2].children[0].textContent = `Temp: ` + forecastData[i].main.temp + ` F`
       // Changes the wind speed
@@ -163,8 +162,7 @@ function createHistoryButtons(cityArray) {
     searchHistoryBtn.value = cityArray[i];
     searchHistoryBtn.textContent = cityArray[i];
     searchHistoryBtn.setAttribute("type", "button");
-
-    // HELP- how do I target each button and link the previous search to it??
+    // When the buttons are clicked, previous data will show
     searchHistoryBtn.addEventListener(`click`, searchCity)
   }
   // append btn to search history div
