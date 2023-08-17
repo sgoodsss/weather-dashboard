@@ -159,15 +159,18 @@ function createHistoryButtons(cityArray) {
     // Creates Button for old searches
     var searchHistoryBtn = document.createElement("button")
     searchHistoryBtn.classList.add("btn", "btn-secondary", "btn-lg", "fullwidth");
+    // Took the name of the button and made it the value
+    searchHistoryBtn.value = cityArray[i];
     searchHistoryBtn.textContent = cityArray[i];
     searchHistoryBtn.setAttribute("type", "button");
 
     // HELP- how do I target each button and link the previous search to it??
-    // searchHistoryBtn.addEventListener(`click`, function (event) {
-    //   searchTextEl.setAttribute("value", event.target)
-    //   getWeather();
-    // })
+    searchHistoryBtn.addEventListener(`click`, searchCity)
   }
   // append btn to search history div
   historyContainerEl.append(searchHistoryBtn);
+}
+
+function searchCity() {
+  getWeather(this.textContent);
 }
