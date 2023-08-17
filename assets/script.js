@@ -113,11 +113,11 @@ function getWeather(city) {
       let locationIcon = fiveDayBoxes[i].children[1].children[0];
       locationIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${icon1}.png">`
       // Changes the temperature
-      fiveDayBoxes[i].children[1].children[0].textContent = `Temp: ` + forecastData[i].main.temp + ` F`
+      fiveDayBoxes[i].children[2].children[0].textContent = `Temp: ` + forecastData[i].main.temp + ` F`
       // Changes the wind speed
-      fiveDayBoxes[i].children[1].children[1].textContent = `Wind Speed: ` + forecastData[i].wind.speed + ` m/s`
+      fiveDayBoxes[i].children[2].children[1].textContent = `Wind Speed: ` + forecastData[i].wind.speed + ` m/s`
       // Changes the humidity
-      fiveDayBoxes[i].children[1].children[2].textContent = `Humidity: ` + forecastData[i].main.humidity + `%`
+      fiveDayBoxes[i].children[2].children[2].textContent = `Humidity: ` + forecastData[i].main.humidity + `%`
     }
   }
 }
@@ -163,10 +163,10 @@ function createHistoryButtons(cityArray) {
     searchHistoryBtn.setAttribute("type", "button");
 
     // HELP- how do I target each button and link the previous search to it??
-    searchHistoryBtn.addEventListener(`click`, function (event) {
-      searchTextEl.setAttribute("value", event.target)
-      getWeather();
-    })
+    // searchHistoryBtn.addEventListener(`click`, function (event) {
+    //   searchTextEl.setAttribute("value", event.target)
+    //   getWeather();
+    // })
   }
   // append btn to search history div
   historyContainerEl.append(searchHistoryBtn);
