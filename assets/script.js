@@ -10,14 +10,14 @@ var cityArray = [];
 var historyContainerEl = $(`#cityHistoryButtons`)
 
 // Delete this before submitting.  Clear out HTML manually
-function showElements() {
-  var x = document.getElementById("hiddenEl");
-  if (x.style.display === "block") {
-    x.style.display = "none";
-  } else {
-    x.style.display = "block";
-  }
-}
+// function showElements() {
+//   var x = document.getElementById("hiddenEl");
+//   if (x.style.display === "block") {
+//     x.style.display = "none";
+//   } else {
+//     x.style.display = "block";
+//   }
+// }
 
 // Click Event for Search Button 
 searchButton.addEventListener(`click`, inputValidate)
@@ -39,13 +39,6 @@ function inputValidate(event) {
   // }
   searchTextEl.value = " ";
 }
-
-// Click Event for History Buttons
-// NOT WORKING
-historyContainerEl.addEventListener(`click`, function (event) {
-  searchTextEl.setAttribute("value", event.target.text)
-  getWeather();
-})
 
 // Gets ALL weather data from API
 function getWeather(city) {
@@ -70,7 +63,6 @@ function getWeather(city) {
   function getFutureWeather(pullData) {
     // Same as (data[0])
     var { lat, lon } = pullData
-    var cityName = pullData.name
     var apiCoordinateURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=b98ec477e026dbcba46222f669c18788&units=imperial`
     fetch(apiCoordinateURL)
       .then(function (coordinateResponse) {
@@ -79,7 +71,6 @@ function getWeather(city) {
             // create empty varible to push 5 days of data into
             var emptyFutureVariable = []
             var emptyCurrentVariable = []
-            // var emptyAllFutureVariable = []
             var dataList = data.list;
 
             // For current forecast
@@ -189,6 +180,11 @@ function createHistoryButtons(cityArray) {
     searchHistoryBtn.classList.add("btn", "btn-secondary", "btn-lg", "fullwidth");
     searchHistoryBtn.textContent = cityArray[i];
     searchHistoryBtn.setAttribute("type", "button");
+    
+    searchHistoryBtn.addEventListener(`click`, function (event) {
+      searchTextEl.setAttribute("value", event.target)
+      getWeather();
+    })
   }
   // append btn to search history div
   historyContainerEl.append(searchHistoryBtn);
