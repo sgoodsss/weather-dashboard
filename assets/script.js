@@ -98,9 +98,9 @@ function getWeather(city) {
                     // CURRENT DAY DISPLAY
 
                     //Gets the current weather icon
-                    let locationIcon = document.querySelector('.weather-icon1');
-                    const icon = emptyCurrentVariable[0].weather[0].icon;
-                    locationIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${icon}.png">`
+                    // let locationIcon = document.querySelector('.weather-icon1');
+                    // const icon = emptyCurrentVariable[0].weather[0].icon;
+                    // locationIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${icon}.png">`
 
                     // Display the City Name, Date, and cityCurrentWeatherIcon on cityNameInfo
                     cityNameInfo.textContent = weatherData.city.name + ` ` + dayjs().format(`MMM D, YYYY`)
@@ -125,12 +125,12 @@ function getWeather(city) {
     getFutureDates();
 
     // let locationIcon = document.querySelectorAll('.weather-icon');
-    // const icon = forecastData.weather[0].icon;
-    // console.log(icon)
 
     for (let i = 0; i < fiveDayBoxes.length; i++) {
       // Changes the weather icon
-      // locationIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${icon}.png">`
+      const icon1 = forecastData[i].weather[0].icon;
+      let locationIcon = fiveDayBoxes[i].children[1].children[0];
+      locationIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${icon1}.png">`
       // Changes the temperature
       fiveDayBoxes[i].children[1].children[0].textContent = `Temp: ` + forecastData[i].main.temp + ` F`
       // Changes the wind speed
@@ -180,7 +180,7 @@ function createHistoryButtons(cityArray) {
     searchHistoryBtn.classList.add("btn", "btn-secondary", "btn-lg", "fullwidth");
     searchHistoryBtn.textContent = cityArray[i];
     searchHistoryBtn.setAttribute("type", "button");
-    
+
     searchHistoryBtn.addEventListener(`click`, function (event) {
       searchTextEl.setAttribute("value", event.target)
       getWeather();
