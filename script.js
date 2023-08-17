@@ -35,7 +35,7 @@ function getWeather(city) {
   getCoordinates(city);
 
   function getCoordinates(search) {
-    var apiCityURL = `http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=b98ec477e026dbcba46222f669c18788`
+    var apiCityURL = `https://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=b98ec477e026dbcba46222f669c18788`
     fetch(apiCityURL)
       .then(function (response) {
         // Stores response in JSON object
