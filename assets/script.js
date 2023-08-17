@@ -9,16 +9,6 @@ var cityList = document.getElementById("cityList");
 var cityArray = [];
 var historyContainerEl = $(`#cityHistoryButtons`)
 
-// Delete this before submitting.  Clear out HTML manually
-// function showElements() {
-//   var x = document.getElementById("hiddenEl");
-//   if (x.style.display === "block") {
-//     x.style.display = "none";
-//   } else {
-//     x.style.display = "block";
-//   }
-// }
-
 // Click Event for Search Button 
 searchButton.addEventListener(`click`, inputValidate)
 // Validates input
@@ -34,9 +24,7 @@ function inputValidate(event) {
   // Set item in localstorage
   localStorage.setItem("cityName", JSON.stringify(cityArray))
   getWeather(search);
-  // for (var i = 0; i < cityArray.length; i++) {
   createHistoryButtons(cityArray);
-  // }
   searchTextEl.value = " ";
 }
 
@@ -83,10 +71,6 @@ function getWeather(city) {
               emptyFutureVariable.push(pushFutureData);
             }
 
-            // For all Future Forecast Days
-            // var pushAllFutureData = dataList[i];
-            // emptyAllFutureVariable.push(pushAllFutureData)
-
             // Create new function for printing the results in HTML
             printForecastData(emptyFutureVariable)
 
@@ -98,9 +82,9 @@ function getWeather(city) {
                     // CURRENT DAY DISPLAY
 
                     //Gets the current weather icon
-                    // let locationIcon = document.querySelector('.weather-icon1');
-                    // const icon = emptyCurrentVariable[0].weather[0].icon;
-                    // locationIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${icon}.png">`
+                    let locationIcon = document.querySelector('.weather-icon1');
+                    const icon = emptyCurrentVariable[0].weather[0].icon;
+                    locationIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${icon}.png">`
 
                     // Display the City Name, Date, and cityCurrentWeatherIcon on cityNameInfo
                     cityNameInfo.textContent = weatherData.city.name + ` ` + dayjs().format(`MMM D, YYYY`)
@@ -120,14 +104,11 @@ function getWeather(city) {
 
   // Pass through emptyVariable data into forecastData params
   function printForecastData(forecastData) {
-    // console.log(forecastData)
     // Changes the Date
     getFutureDates();
-
-    // let locationIcon = document.querySelectorAll('.weather-icon');
-
     for (let i = 0; i < fiveDayBoxes.length; i++) {
       // Changes the weather icon
+      // HELP- how do I make this icon appear??
       const icon1 = forecastData[i].weather[0].icon;
       let locationIcon = fiveDayBoxes[i].children[1].children[0];
       locationIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${icon1}.png">`
@@ -181,6 +162,7 @@ function createHistoryButtons(cityArray) {
     searchHistoryBtn.textContent = cityArray[i];
     searchHistoryBtn.setAttribute("type", "button");
 
+    // HELP- how do I target each button and link the previous search to it??
     searchHistoryBtn.addEventListener(`click`, function (event) {
       searchTextEl.setAttribute("value", event.target)
       getWeather();
