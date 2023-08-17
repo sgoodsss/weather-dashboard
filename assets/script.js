@@ -43,7 +43,7 @@ function inputValidate(event) {
 // Click Event for History Buttons
 // NOT WORKING
 historyContainerEl.addEventListener(`click`, function (event) {
-  searchHistoryBtn.setAttribute("value", event.target.text)
+  searchTextEl.setAttribute("value", event.target.text)
   getWeather();
 })
 
